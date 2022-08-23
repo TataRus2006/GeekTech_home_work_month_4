@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    {% for name in order_data %}
-        <div>{{name.name}}</div>
+{% extends 'base.html' %}
+{% block page %}<br/>
+{% for client in order_data %}
+        <div>
+            Имя: {{ client.name }}<br/>
+            Адрес: {{client.address}}<br/>
+            Кол-во бутылей: {{ client.bottles_ordered}}<br/>
+            Фотография:
+            {% if client.photo %}
+                <br/>
+                <img src="{{ client.photo.url }}" alt="нет фото">
+            {% endif %}
+        </div>
+    <hr>
     {% endfor %}
-</body>
-</html>
+{% endblock %}

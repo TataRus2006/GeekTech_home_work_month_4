@@ -6,3 +6,9 @@ class Client(models.Model):
     address = models.CharField(max_length=255)
     active = models.BooleanField(default=False)
     bottles_ordered = models.IntegerField(default=1)
+    photo = models.ImageField(
+        verbose_name="фотография",
+        upload_to='photo',
+        null=True,
+        blank=True
+    )
