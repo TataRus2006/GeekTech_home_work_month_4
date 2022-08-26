@@ -1,3 +1,5 @@
+from email.policy import default
+
 from django.db import models
 
 
@@ -12,6 +14,7 @@ class Client(models.Model):
         null=True,
         blank=True
     )
+
 
 class Order(models.Model):
     client = models.ForeignKey(
@@ -41,14 +44,3 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
-
-
-class BottlesCount(models.Model):
-    bottle = models.ForeignKey(to=Client, on_delete=models.SET_NULL, null=True, blank=True, related_name="bottle")
-    count = models.IntegerField()
-    order = models.ForeignKey(to=Order, on_delete=models.SET_NULL, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-    finished = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"{self.bottle} {self.count} {self.order}"

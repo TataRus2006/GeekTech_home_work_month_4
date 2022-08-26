@@ -1,7 +1,10 @@
 .env
 venv
 .idea
+
 media/
+static/
+
 .vscode
 __pycache__/
 *.py[cod]

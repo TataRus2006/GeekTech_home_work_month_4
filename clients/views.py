@@ -8,13 +8,3 @@ def clients_list(request):
     context['order_data'] = order_data
     return render(request, 'clients.html', context)
 
-def contacts(request):
-    return render(request, 'contacts.html')
-
-
-def about(request):
-    return render(request, 'about.html')
-
-
-def products_list(request):
-    return render(request, 'products.html')

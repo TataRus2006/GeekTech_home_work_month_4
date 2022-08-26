@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Client, Order, BottlesCount
+from .models import Client, Order
 
 
 admin.site.register(Client)
@@ -15,13 +15,3 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Order, OrderAdmin)
-
-
-class BottlesCountAdmin(admin.ModelAdmin):
-    model = BottlesCount
-    list_display = ["order", "bottle", "count", "finished"]
-    list_editable = ["bottle", "count", "finished"]
-    fields = ["order", "bottle", "count", "finished"]
-
-
-admin.site.register(BottlesCount, BottlesCountAdmin)
