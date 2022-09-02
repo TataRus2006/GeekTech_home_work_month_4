@@ -1,59 +1,38 @@
-from django.shortcuts import render, HttpResponse
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from .models import Client, Order
-from .forms import OrderForm
 
 
-def clients_list(request):
-    context = {}
-    order_data = Client.objects.all()
-    context['order_data'] = order_data
-    return render(request, 'clients.html', context)
+class ClientListView(ListView):
+    model = Client
+    template_name = 'clients.html'
 
 
-def order_list(request):
-    return render(request, 'order_list.html', {"order_list": Order.objects.all()})
+class OrderListView(ListView):
+    model = Order
+    template_name = 'order_list.html'
 
 
-def order_info(request, id):
-    return render(
-        request,
-        'order_info.html',
-        {'order_object': Order.objects.get(id=id)}
-    )
+class OrderCreateView(CreateView):
+    model = Order
+    template_name = 'order_create.html'
+    fields = ["name", "contacts", "description"]
+    success_url = "/orders/"
 
 
-
-def order_create(request):
-    context = {}
-    if request.method == "POST":
-        order_form = OrderForm(request.POST)
-        if order_form.is_valid():
-            order_form.save()
-            return render(request, 'order_list.html', {"order_list": Order.objects.all()})
-        return HttpResponse("Данные не валидны")
-
-    context["order_form"] = OrderForm()
-    return render(request, 'order_create.html', context)
+class OrderUpdateView(UpdateView):
+    model = Order
+    template_name = 'order_update.html'
+    fields = ["name", "contacts", "description"]
+    success_url = "/orders/"
 
 
-def order_delete(request, id):
-        context = {}
-        if request.method == "POST":
-            order_object = Order.objects.get(id=id)
-            order_object.delete()
-            return render(request, 'order_list.html', {"order_list": Order.objects.all()})
-        context["form"] = OrderForm()
-        return render(request, 'order_delete.html', context)
+class OrderDeleteView(DeleteView):
+    model = Order
+    template_name = 'order_delete.html'
+    fields = ["name", "contacts", "description"]
+    success_url = "/orders/"
 
 
-def order_update(request, id):
-    context = {}
-    order_object = Order.objects.get(id=id)
-    if request.method == 'POST':
-        order = OrderForm(request.POST, instance=order_object)
-        if order.is_valid():
-            order_object.save()
-            return render(request, 'order_list.html', {"order_list": Order.objects.all()})
-
-    context['order'] = OrderForm(instance=order_object)
-    return render(request, 'order_update.html', context)
+class OrderInfoView(DetailView):
+    model = Order
+    template_name = "order_info.html"

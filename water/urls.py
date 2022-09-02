@@ -10,13 +10,13 @@ urlpatterns = [
     path('contacts/', contacts),
     path('about/', about),
     path('', products_list),
-    path('clients/', clients_list),
     path('makers/', makers_list),
-    path('orders/', order_list, name="order-list"),
-    path('order/<int:id>/', order_info, name="order-info"),
-    path('order/create/', order_create, name='order-create'),
-    path('order/update/<int:id>/', order_update, name='order-update'),
-    path('order/delete/<int:id>/', order_delete, name='order-delete'),
+    path('clients/', ClientListView.as_view(), name='clients'),
+    path('orders/', OrderListView.as_view(), name="order-list"),
+    path('order/create/', OrderCreateView.as_view(), name='order-create'),
+    path('order/update/<int:pk>/', OrderUpdateView.as_view(), name='order-update'),
+    path('order/delete/<int:pk>/', OrderDeleteView.as_view(), name='order-delete'),
+    path('order/<int:pk>/', OrderInfoView.as_view(), name="order-info"),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

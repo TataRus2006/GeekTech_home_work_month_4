@@ -2,8 +2,8 @@
 {% block page %}
     <form method="POST">
         {% csrf_token %}
-        {{ order_form.as_p }}<br/>
+        {{ form.as_p }}<br/>
         <div>Подтвердите удаление</div><br/>
         <button>Удалить</button>
     </form>
-{% endblock %} 
+{% endblock %}

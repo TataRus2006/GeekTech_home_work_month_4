@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block page %}<br/>
-{% for client in order_data %}
+{% for client in client_list %}
         <div>
             Имя: {{ client.name }}<br/>
             Адрес: {{client.address}}<br/>
