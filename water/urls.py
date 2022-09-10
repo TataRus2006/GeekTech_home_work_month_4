@@ -17,6 +17,8 @@ urlpatterns = [
     path('order/update/<int:pk>/', OrderUpdateView.as_view(), name='order-update'),
     path('order/delete/<int:pk>/', OrderDeleteView.as_view(), name='order-delete'),
     path('order/<int:pk>/', OrderInfoView.as_view(), name="order-info"),
+    path('signin/', LoginView.as_view(), name="sign-in"),
+    path('signout/', LogoutView.as_view(), name="sign-out"),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
